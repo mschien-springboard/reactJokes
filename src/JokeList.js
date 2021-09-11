@@ -20,7 +20,7 @@ class JokeList extends Component {
     this.vote = this.vote.bind(this);
   }
 
-  /* at mount, get jokes */
+
 
   componentDidMount() {
     if (this.state.jokes.length < this.props.numJokesToGet) this.getJokes();
@@ -30,11 +30,10 @@ class JokeList extends Component {
     if (this.state.jokes.length < this.props.numJokesToGet) this.getJokes();
   }
 
-  /* retrieve jokes from API */
+ 
 
   async getJokes() {
     try {
-      // load jokes one at a time, adding not-yet-seen jokes
       let jokes = this.state.jokes;
       let jokeVotes = JSON.parse(
         window.localStorage.getItem("jokeVotes") || "{}"
@@ -63,7 +62,6 @@ class JokeList extends Component {
     }
   }
 
-  /* empty joke list, set to loading state, and then call getJokes */
 
   generateNewJokes() {
     this.setState(st => ({ jokes: st.jokes.filter(j => j.locked)}));
@@ -76,7 +74,6 @@ class JokeList extends Component {
     }));
   }
 
-  /* change vote for this id by delta (+1 or -1) */
 
   vote(id, delta) {
     let jokeVotes = JSON.parse(window.localStorage.getItem("jokeVotes"));
@@ -95,7 +92,6 @@ class JokeList extends Component {
     }));
   }
 
-  /* render: either loading spinner or list of sorted jokes. */
 
   render() {
     let sortedJokes = [...this.state.jokes].sort((a, b) => b.votes - a.votes);
